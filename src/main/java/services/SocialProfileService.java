@@ -70,6 +70,12 @@ public class SocialProfileService {
 	}
 
 	public void delete(final SocialProfile socialProfile) {
+
+		Actor actor;
+
+		actor = this.actorService.getPrincipal();
+		Assert.isTrue(actor.getId() == socialProfile.getActor().getId());
+
 		Assert.notNull(socialProfile);
 		this.socialProfileRepository.delete(socialProfile);
 	}

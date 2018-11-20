@@ -56,11 +56,4 @@ public class ConfigurationService {
 		return result;
 	}
 
-	public void delete(final Configuration configuration) {
-		Assert.notNull(configuration);
-
-		this.configurationRepository.delete(configuration);
-
-	}
-
 }

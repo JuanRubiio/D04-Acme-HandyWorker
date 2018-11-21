@@ -6,6 +6,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
@@ -13,7 +14,7 @@ import org.hibernate.validator.constraints.Range;
 
 @Embeddable
 @Access(AccessType.PROPERTY)
-public class CreditCard {
+public class CreditCard extends DomainEntity {
 
 	private String	holderName;
 	private String	brandName;
@@ -48,6 +49,7 @@ public class CreditCard {
 	public void setNumber(final String number) {
 		this.number = number;
 	}
+	@NotNull
 	@Range(min = 1, max = 12)
 	public int getExpiryMonth() {
 		return this.expiryMonth;
@@ -56,6 +58,8 @@ public class CreditCard {
 	public void setExpiryMonth(final int expiryMonth) {
 		this.expiryMonth = expiryMonth;
 	}
+
+	@NotNull
 	@Min(2018)
 	public int getExpiryYear() {
 		return this.expiryYear;
@@ -64,6 +68,7 @@ public class CreditCard {
 	public void setExpiryYear(final int expiryYear) {
 		this.expiryYear = expiryYear;
 	}
+	@NotNull
 	@Range(min = 100, max = 999)
 	public int getCvv() {
 		return this.cvv;

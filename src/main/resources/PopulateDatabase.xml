@@ -176,7 +176,7 @@
 		<property name="phoneNumber" value="123456789" />
 		<property name="linkedinIdProfile" value="http://www.google.es" />
 	</bean>
-	
+
 
 	<bean id="educationalRecord1" class="domain.EducationalRecord">
 		<property name="title" value="title1" />
@@ -185,7 +185,7 @@
 		<property name="comments" value="comments" />
 		<property name="end" value="1980/01/01" />
 		<property name="begin" value="1980/01/01" />
-	
+
 	</bean>
 
 	<bean id="educationalRecord2" class="domain.EducationalRecord">
@@ -195,7 +195,7 @@
 		<property name="comments" value="comments" />
 		<property name="end" value="1980/01/01" />
 		<property name="begin" value="1980/01/01" />
-	
+
 	</bean>
 
 	<bean id="professionalRecord1" class="domain.ProfessionalRecord">
@@ -205,7 +205,7 @@
 		<property name="role" value="role" />
 		<property name="attachment" value="http://www.google.es" />
 		<property name="comments" value="comments" />
-		
+
 	</bean>
 
 	<bean id="professionalRecord2" class="domain.ProfessionalRecord">
@@ -215,7 +215,7 @@
 		<property name="role" value="role" />
 		<property name="attachment" value="http://www.google.es" />
 		<property name="comments" value="comments" />
-	
+
 	</bean>
 
 	<bean id="endorserRecord1" class="domain.EndorserRecord">
@@ -268,8 +268,8 @@
 		<property name="endoserRecords" ref="endorserRecord2" />
 		<property name="miscellaneousRecords" ref="miscellaneousRecord2" />
 	</bean>
-	
-	
+
+
 
 	<bean id="handyWorker1" class="domain.HandyWorker">
 		<property name="name" value="David" />
@@ -282,7 +282,7 @@
 		<property name="mark" value="David Broncano Aguilera" />
 		<property name="curriculum" ref="curriculum1" />
 		<property name="userAccount" ref="userAccount10" />
-		<property name="score" value = ""/>
+		<property name="score" value="" />
 	</bean>
 
 	<bean id="handyWorker2" class="domain.HandyWorker">
@@ -296,7 +296,7 @@
 		<property name="mark" value="Alberto Romero Tomás" />
 		<property name="curriculum" ref="curriculum2" />
 		<property name="userAccount" ref="userAccount11" />
-		<property name="score" value = ""/>
+		<property name="score" value="" />
 	</bean>
 
 	<bean id="administrator1" class="domain.Administrator">
@@ -352,7 +352,7 @@
 		<property name="address" value="Calle Buenaventura Numero 5" />
 		<property name="photo" value="http://www.photo-database.org/mi-photo.jpg" />
 		<property name="userAccount" ref="userAccount2" />
-		<property name="score" value = ""/>
+		<property name="score" value="" />
 	</bean>
 
 	<bean id="customer2" class="domain.Customer">
@@ -364,7 +364,7 @@
 		<property name="address" value="Calle de la Fuente nº16 3B" />
 		<property name="photo" value="http://www.photo-database.org/mi-photo.jpg" />
 		<property name="userAccount" ref="userAccount6" />
-		<property name="score" value = ""/>
+		<property name="score" value="" />
 	</bean>
 
 	<bean id="customer3" class="domain.Customer">
@@ -376,7 +376,7 @@
 		<property name="address" value="C/Avioneta Nº26" />
 		<property name="photo" value="http://www.photo-database.org/mi-photo.jpg" />
 		<property name="userAccount" ref="userAccount7" />
-		<property name="score" value = ""/>
+		<property name="score" value="" />
 	</bean>
 	<bean id="sponsor1" class="domain.Sponsor">
 		<property name="name" value="Antonio" />
@@ -923,50 +923,7 @@
 		<property name="system" value="true" />
 	</bean>
 
-	<bean id="note1" class="domain.Note">
-		<property name="moment" value="1980/01/01 03:00:00" />
-		<property name="mandatoryComment" value="mandatoryComment1" />
-		<property name="handyworkerComments" value="handyworkerComment1" />
-		<property name="customerComments" value="customerComments1" />
-		<property name="refereeComments" value="refereeComments1" />
-	
-	</bean>
 
-	<bean id="note2" class="domain.Note">
-		<property name="moment" value="1980/01/01 03:00:00" />
-		<property name="mandatoryComment" value="mandatoryComment2" />
-		<property name="handyworkerComments" value="handyworkerComment2" />
-		<property name="customerComments" value="customerComments2" />
-		<property name="refereeComments" value="refereeComments2" />
-
-		
-	</bean>
-
-	<bean id="note3" class="domain.Note">
-		<property name="moment" value="1980/01/01 03:00:00" />
-		<property name="mandatoryComment" value="mandatoryComment3" />
-		<property name="handyworkerComments" value="handyworkerComment3" />
-		<property name="customerComments" value="customerComments3" />
-		<property name="refereeComments" value="refereeComments3" />
-	
-	</bean>
-
-	<bean id="note4" class="domain.Note">
-		<property name="moment" value="1980/01/01 03:00:00" />
-		<property name="mandatoryComment" value="mandatoryComment4" />
-		<property name="handyworkerComments" value="handyworkerComment4" />
-		<property name="customerComments" value="customerComments4" />
-		<property name="refereeComments" value="refereeComments4" />
-		
-	</bean>
-
-	<bean id="note5" class="domain.Note">
-		<property name="moment" value="1980/01/01 03:00:00" />
-		<property name="mandatoryComment" value="mandatoryComment5" />
-		<property name="handyworkerComments" value="handyworkerComment5" />
-		<property name="customerComments" value="customerComments5" />
-		<property name="refereeComments" value="refereeComments5" />
-	</bean>
 
 	<bean id="report1" class="domain.Report">
 		<property name="moment" value="1980/01/01 23:59:00" />
@@ -974,12 +931,6 @@
 		<property name="attachements" value="attachements1" />
 		<property name="draft" value="true" />
 		<property name="referee" ref="referee1" />
-		<property name="collectionNotes">
-			<list>
-				<ref bean="note1" />
-				<ref bean="note2" />
-			</list>
-		</property>
 	</bean>
 
 	<bean id="report2" class="domain.Report">
@@ -988,11 +939,6 @@
 		<property name="attachements" value="attachements2" />
 		<property name="draft" value="true" />
 		<property name="referee" ref="referee1" />
-		<property name="collectionNotes">
-			<list>
-				<ref bean="note3" />
-			</list>
-		</property>
 	</bean>
 
 	<bean id="report3" class="domain.Report">
@@ -1001,11 +947,6 @@
 		<property name="attachements" value="attachements3" />
 		<property name="draft" value="false" />
 		<property name="referee" ref="referee2" />
-		<property name="collectionNotes">
-			<list>
-				<ref bean="note4" />
-			</list>
-		</property>
 	</bean>
 
 	<bean id="report4" class="domain.Report">
@@ -1014,11 +955,52 @@
 		<property name="attachements" value="attachements4" />
 		<property name="draft" value="true" />
 		<property name="referee" ref="referee2" />
-		<property name="collectionNotes">
-			<list>
-				<ref bean="note5" />
-			</list>
-		</property>
+	</bean>
+
+	<bean id="note1" class="domain.Note">
+		<property name="moment" value="1980/01/01 03:00:00" />
+		<property name="mandatoryComment" value="mandatoryComment1" />
+		<property name="handyworkerComments" value="handyworkerComment1" />
+		<property name="customerComments" value="customerComments1" />
+		<property name="refereeComments" value="refereeComments1" />
+		<property name="report" ref="report1" />
+
+	</bean>
+
+	<bean id="note2" class="domain.Note">
+		<property name="moment" value="1980/01/01 03:00:00" />
+		<property name="mandatoryComment" value="mandatoryComment2" />
+		<property name="handyworkerComments" value="handyworkerComment2" />
+		<property name="customerComments" value="customerComments2" />
+		<property name="refereeComments" value="refereeComments2" />
+		<property name="report" ref="report2" />
+	</bean>
+
+	<bean id="note3" class="domain.Note">
+		<property name="moment" value="1980/01/01 03:00:00" />
+		<property name="mandatoryComment" value="mandatoryComment3" />
+		<property name="handyworkerComments" value="handyworkerComment3" />
+		<property name="customerComments" value="customerComments3" />
+		<property name="refereeComments" value="refereeComments3" />
+		<property name="report" ref="report3" />
+	</bean>
+
+	<bean id="note4" class="domain.Note">
+		<property name="moment" value="1980/01/01 03:00:00" />
+		<property name="mandatoryComment" value="mandatoryComment4" />
+		<property name="handyworkerComments" value="handyworkerComment4" />
+		<property name="customerComments" value="customerComments4" />
+		<property name="refereeComments" value="refereeComments4" />
+		<property name="report" ref="report4" />
+	</bean>
+
+	<bean id="note5" class="domain.Note">
+		<property name="moment" value="1980/01/01 03:00:00" />
+		<property name="mandatoryComment" value="mandatoryComment5" />
+		<property name="handyworkerComments" value="handyworkerComment5" />
+		<property name="customerComments" value="customerComments5" />
+		<property name="refereeComments" value="refereeComments5" />
+		<property name="report" ref="report4" />
 	</bean>
 
 
@@ -1035,7 +1017,7 @@
 				<ref bean="report4" />
 			</list>
 		</property>
-	
+
 	</bean>
 
 	<bean id="complaint2" class="domain.Complaint">
@@ -1060,7 +1042,7 @@
 		<property name="pictures"
 			value="http://www.photo-database.org/tutorial-1.jpg;http://www.photo-database.org/tutorial-2.jpg;http://www.photo-database.org/tutorial-3.jpg" />
 		<property name="orden" value="1" />
-	
+
 	</bean>
 
 	<bean id="section2" class="domain.Section">
@@ -1069,7 +1051,7 @@
 		<property name="pictures"
 			value="http://www.photo-database.org/tutorial-1.jpg;http://www.photo-database.org/tutorial-2.jpg;http://www.photo-database.org/tutorial-3.jpg" />
 		<property name="orden" value="2" />
-	
+
 	</bean>
 
 	<bean id="section3" class="domain.Section">
@@ -1078,7 +1060,7 @@
 		<property name="pictures"
 			value="http://www.photo-database.org/tutorial-1.jpg;http://www.photo-database.org/tutorial-2.jpg;http://www.photo-database.org/tutorial-3.jpg" />
 		<property name="orden" value="3" />
-	
+
 	</bean>
 
 	<bean id="tutorial1" class="domain.Tutorial">
@@ -1163,7 +1145,7 @@
 		<property name="startMoment" value="1980/01/01 18:04:00" />
 		<property name="endMoment" value="1980/01/01 10:15:00" />
 		<property name="ordered" value="1" />
-	
+
 	</bean>
 
 	<bean id="phase2" class="domain.Phase">
@@ -1290,10 +1272,10 @@
 		<property name="category" value="" />
 		<property name="fixUpTasks">
 			<list>
-			
+
 			</list>
 		</property>
-		<property name="handyWorker" ref="handyWorker2"/>
+		<property name="handyWorker" ref="handyWorker2" />
 	</bean>
 
 	<bean id="finder2" class="domain.Finder">
@@ -1307,10 +1289,10 @@
 		<property name="category" value="" />
 		<property name="fixUpTasks">
 			<list>
-				
+
 			</list>
 		</property>
-		<property name="handyWorker" ref="handyWorker1"/>
+		<property name="handyWorker" ref="handyWorker1" />
 	</bean>
 
 </beans>

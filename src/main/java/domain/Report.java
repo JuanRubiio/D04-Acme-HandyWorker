@@ -1,12 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -23,8 +25,22 @@ public class Report extends DomainEntity {
 	private String	attachements;
 	private Boolean	draft;
 
-	//private Collection<Note>	collectionNotes;
-	private Referee	referee;
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Complaint getComplaint() {
+		return this.complaint;
+	}
+
+	public void setComplaint(final Complaint complaint) {
+		this.complaint = complaint;
+	}
+
+
+	private Referee				referee;
+	private Complaint			complaint;
+	private Collection<Note>	collectionNotes;
 
 
 	@NotNull
@@ -36,18 +52,17 @@ public class Report extends DomainEntity {
 	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
-	/*
-	 * @Valid
-	 * 
-	 * @OneToMany(mappedBy = "report")
-	 * public Collection<Note> getCollectionNotes() {
-	 * return this.collectionNotes;
-	 * }
-	 * 
-	 * public void setCollectionNotes(final Collection<Note> collectionNotes) {
-	 * this.collectionNotes = collectionNotes;
-	 * }
-	 */
+
+	@Valid
+	@OneToMany(mappedBy = "report")
+	public Collection<Note> getCollectionNotes() {
+		return this.collectionNotes;
+	}
+
+	public void setCollectionNotes(final Collection<Note> collectionNotes) {
+		this.collectionNotes = collectionNotes;
+	}
+
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)

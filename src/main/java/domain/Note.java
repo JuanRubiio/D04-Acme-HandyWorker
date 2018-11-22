@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -22,6 +23,17 @@ public class Note extends DomainEntity {
 	private String	customerComments;
 	private String	refereeComments;
 
+	private Report	report;
+
+
+	@ManyToOne(optional = false)
+	public Report getReport() {
+		return this.report;
+	}
+
+	public void setReport(final Report report) {
+		this.report = report;
+	}
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)

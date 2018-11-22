@@ -1,18 +1,14 @@
 
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -22,12 +18,10 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Complaint extends DomainEntity {
 
-	private String				ticker;
-	private Date				moment;
-	private String				description;
-	private String				attachements;
-	//external attributes
-	private Collection<Report>	reports;
+	private String	ticker;
+	private Date	moment;
+	private String	description;
+	private String	attachements;
 
 
 	@NotBlank
@@ -65,17 +59,6 @@ public class Complaint extends DomainEntity {
 
 	public void setAttachements(final String attachements) {
 		this.attachements = attachements;
-	}
-
-	@Valid
-	@NotNull
-	@OneToMany(cascade = CascadeType.ALL)
-	public Collection<Report> getReports() {
-		return this.reports;
-	}
-
-	public void setReports(final Collection<Report> reports) {
-		this.reports = reports;
 	}
 
 }

@@ -330,6 +330,10 @@
 		<property name="address" value="refereeaddress1" />
 		<property name="phone" value="666666666" />
 		<property name="userAccount" ref="userAccount4" />
+		<property name="reports">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="referee2" class="domain.Referee">
@@ -341,6 +345,10 @@
 		<property name="address" value="refereeaddress2" />
 		<property name="phone" value="666666666" />
 		<property name="userAccount" ref="userAccount5" />
+		<property name="reports">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="customer1" class="domain.Customer">
@@ -353,6 +361,10 @@
 		<property name="photo" value="http://www.photo-database.org/mi-photo.jpg" />
 		<property name="userAccount" ref="userAccount2" />
 		<property name="score" value="" />
+		<property name="fixUpTasks">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="customer2" class="domain.Customer">
@@ -365,6 +377,10 @@
 		<property name="photo" value="http://www.photo-database.org/mi-photo.jpg" />
 		<property name="userAccount" ref="userAccount6" />
 		<property name="score" value="" />
+		<property name="fixUpTasks">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="customer3" class="domain.Customer">
@@ -377,6 +393,10 @@
 		<property name="photo" value="http://www.photo-database.org/mi-photo.jpg" />
 		<property name="userAccount" ref="userAccount7" />
 		<property name="score" value="" />
+		<property name="fixUpTasks">
+			<list>
+			</list>
+		</property>
 	</bean>
 	<bean id="sponsor1" class="domain.Sponsor">
 		<property name="name" value="Antonio" />
@@ -931,6 +951,12 @@
 		<property name="attachements" value="attachements1" />
 		<property name="draft" value="true" />
 		<property name="referee" ref="referee1" />
+		<property name="complaint" ref="complaint1" />
+		<property name="collectionNotes">
+			<list>
+
+			</list>
+		</property>
 	</bean>
 
 	<bean id="report2" class="domain.Report">
@@ -939,6 +965,12 @@
 		<property name="attachements" value="attachements2" />
 		<property name="draft" value="true" />
 		<property name="referee" ref="referee1" />
+		<property name="complaint" ref="complaint2" />
+		<property name="collectionNotes">
+			<list>
+
+			</list>
+		</property>
 	</bean>
 
 	<bean id="report3" class="domain.Report">
@@ -947,6 +979,12 @@
 		<property name="attachements" value="attachements3" />
 		<property name="draft" value="false" />
 		<property name="referee" ref="referee2" />
+		<property name="complaint" ref="complaint3" />
+		<property name="collectionNotes">
+			<list>
+
+			</list>
+		</property>
 	</bean>
 
 	<bean id="report4" class="domain.Report">
@@ -955,6 +993,12 @@
 		<property name="attachements" value="attachements4" />
 		<property name="draft" value="true" />
 		<property name="referee" ref="referee2" />
+		<property name="complaint" ref="complaint4" />
+		<property name="collectionNotes">
+			<list>
+
+			</list>
+		</property>
 	</bean>
 
 	<bean id="note1" class="domain.Note">
@@ -1011,13 +1055,6 @@
 		<property name="description" value="The handyworker is too lazy." />
 		<property name="attachements"
 			value="http://www.seemyattachements.com/my-dashboard/attachement1;http://www.seemyattachements.com/my-dashboard/attachement2;http://www.seemyattachements.com/my-dashboard/attachement3" />
-		<property name="reports">
-			<list>
-				<ref bean="report3" />
-				<ref bean="report4" />
-			</list>
-		</property>
-
 	</bean>
 
 	<bean id="complaint2" class="domain.Complaint">
@@ -1027,13 +1064,22 @@
 			value="The handyWorker doesn´t repared the door as I show him how I wanted." />
 		<property name="attachements"
 			value="http://www.seemyattachements.com/my-dashboard/attachement1;http://www.seemyattachements.com/my-dashboard/attachement2;http://www.seemyattachements.com/my-dashboard/attachement3" />
-		<property name="reports">
-			<list>
-				<ref bean="report1" />
-				<ref bean="report2" />
-			</list>
-		</property>
+	</bean>
 
+	<bean id="complaint3" class="domain.Complaint">
+		<property name="ticker" value="181101-ABCY" />
+		<property name="moment" value="1980/01/01 23:40:00" />
+		<property name="description" value="The handyworker is too lazy." />
+		<property name="attachements"
+			value="http://www.seemyattachements.com/my-dashboard/attachement1;http://www.seemyattachements.com/my-dashboard/attachement2;http://www.seemyattachements.com/my-dashboard/attachement3" />
+	</bean>
+
+	<bean id="complaint4" class="domain.Complaint">
+		<property name="ticker" value="181101-ATCE" />
+		<property name="moment" value="1980/07/01 22:40:00" />
+		<property name="description" value="The handyworker is too lazy." />
+		<property name="attachements"
+			value="http://www.seemyattachements.com/my-dashboard/attachement1;http://www.seemyattachements.com/my-dashboard/attachement2;http://www.seemyattachements.com/my-dashboard/attachement3" />
 	</bean>
 
 	<bean id="section1" class="domain.Section">
@@ -1165,9 +1211,14 @@
 		<property name="maxPrice" value="215.00" />
 		<property name="maxDate" value="1980/01/01 12:00:00" />
 		<property name="minDate" value="1980/01/01 10:05:00" />
-		<property name="complaint">
+		<property name="complaints">
 			<list>
 				<ref bean="complaint1" />
+			</list>
+		</property>
+		<property name="applications">
+			<list>
+
 			</list>
 		</property>
 		<property name="customer" ref="customer2" />
@@ -1183,9 +1234,13 @@
 		<property name="maxPrice" value="180.50" />
 		<property name="maxDate" value="1980/01/01 10:00:00" />
 		<property name="minDate" value="1980/01/01 13:45:00" />
-		<property name="complaint">
+		<property name="complaints">
 			<list>
 				<ref bean="complaint2" />
+			</list>
+		</property>
+		<property name="applications">
+			<list>
 			</list>
 		</property>
 		<property name="customer" ref="customer3" />
@@ -1201,9 +1256,12 @@
 		<property name="maxPrice" value="840.69" />
 		<property name="maxDate" value="1980/01/01 17:00:00" />
 		<property name="minDate" value="1980/01/01 12:50:00" />
-		<property name="complaint">
+		<property name="complaints">
 			<list>
-
+			</list>
+		</property>
+		<property name="applications">
+			<list>
 			</list>
 		</property>
 		<property name="customer" ref="customer2" />
@@ -1219,9 +1277,12 @@
 		<property name="maxPrice" value="470.00" />
 		<property name="maxDate" value="1980/01/01 10:00:00" />
 		<property name="minDate" value="1980/01/01 18:45:00" />
-		<property name="complaint">
+		<property name="complaints">
 			<list>
-
+			</list>
+		</property>
+		<property name="applications">
+			<list>
 			</list>
 		</property>
 		<property name="customer" ref="customer1" />

@@ -14,7 +14,7 @@ import domain.Message;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Integer> {
 
-	@Query("select m from Message m where m.messageBoxes.id=?1 order by m.priority desc")
+	@Query("select b.messages from MessageBox b where b.id = ?1")
 	Collection<Message> findMessagesByMessageBoxesId(int messageBoxesId);
 
 	@Query("select message from Message message where message.date = ?1 and message.sender = ?2")

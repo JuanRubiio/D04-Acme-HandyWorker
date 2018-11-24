@@ -51,6 +51,7 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	private String					username;
 	private String					password;
 	private Collection<Authority>	authorities;
+	private Boolean					enabled	= true;
 
 
 	@Size(min = 5, max = 32)
@@ -119,10 +120,17 @@ public class UserAccount extends DomainEntity implements UserDetails {
 		return true;
 	}
 
+	public Boolean getEnabled() {
+		return this.enabled;
+	}
+
+	public void setEnabled(final Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Transient
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return this.enabled;
 	}
-
 }

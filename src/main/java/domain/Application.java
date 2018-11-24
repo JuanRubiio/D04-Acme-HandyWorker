@@ -10,6 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -83,6 +84,7 @@ public class Application extends DomainEntity {
 	}
 
 	@Valid
+	@OneToOne(optional = true)
 	public CreditCard getCreditCard() {
 		return this.creditCard;
 	}

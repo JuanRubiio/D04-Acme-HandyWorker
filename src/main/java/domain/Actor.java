@@ -10,10 +10,13 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -105,7 +108,8 @@ public abstract class Actor extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 
-	private UserAccount	userAccount;
+	private UserAccount				userAccount;
+	private Collection<MessageBox>	messageBoxes;
 
 
 	@NotNull
@@ -117,6 +121,17 @@ public abstract class Actor extends DomainEntity {
 
 	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy = "actor", cascade = CascadeType.ALL)
+	public Collection<MessageBox> getMessageBoxes() {
+		return this.messageBoxes;
+	}
+
+	public void setMessageBoxes(final Collection<MessageBox> messageBoxes) {
+		this.messageBoxes = messageBoxes;
 	}
 
 }

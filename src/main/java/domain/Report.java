@@ -6,7 +6,6 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -26,9 +25,31 @@ public class Report extends DomainEntity {
 	private String				attachements;
 	private Boolean				draft;
 
-	private Collection<Note>	collectionNotes;
 	private Referee				referee;
+	private Complaint			complaint;
+	private Collection<Note>	collectionNotes;
 
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Complaint getComplaint() {
+		return this.complaint;
+	}
+
+	public void setComplaint(final Complaint complaint) {
+		this.complaint = complaint;
+	}
+
+	@Valid
+	@OneToMany(mappedBy = "report")
+	public Collection<Note> getCollectionNotes() {
+		return this.collectionNotes;
+	}
+
+	public void setCollectionNotes(final Collection<Note> collectionNotes) {
+		this.collectionNotes = collectionNotes;
+	}
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -38,16 +59,6 @@ public class Report extends DomainEntity {
 
 	public void setMoment(final Date moment) {
 		this.moment = moment;
-	}
-
-	@Valid
-	@OneToMany(cascade = CascadeType.ALL)
-	public Collection<Note> getCollectionNotes() {
-		return this.collectionNotes;
-	}
-
-	public void setCollectionNotes(final Collection<Note> collectionNotes) {
-		this.collectionNotes = collectionNotes;
 	}
 
 	@Valid

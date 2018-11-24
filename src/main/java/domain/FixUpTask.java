@@ -108,7 +108,8 @@ public class FixUpTask extends DomainEntity {
 	//-------------RelationShip------------------
 
 	private Customer				customer;
-	private Collection<Complaint>	complaint;
+	private Collection<Complaint>	complaints;
+	private Collection<Application>	applications;
 	private Warranty				warranty;
 	private Category				category;
 
@@ -118,7 +119,7 @@ public class FixUpTask extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
 	public Customer getCustomer() {
 		return this.customer;
 	}
@@ -130,12 +131,12 @@ public class FixUpTask extends DomainEntity {
 	@NotNull
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL)
-	public Collection<Complaint> getComplaint() {
-		return this.complaint;
+	public Collection<Complaint> getComplaints() {
+		return this.complaints;
 	}
 
-	public void setComplaint(final Collection<Complaint> complaint) {
-		this.complaint = complaint;
+	public void setComplaints(final Collection<Complaint> complaint) {
+		this.complaints = complaint;
 	}
 
 	@NotNull
@@ -159,5 +160,13 @@ public class FixUpTask extends DomainEntity {
 	public void setCategory(final Category category) {
 		this.category = category;
 	}
+	@Valid
+	@OneToMany(mappedBy = "fixUpTask")
+	public Collection<Application> getApplications() {
+		return this.applications;
+	}
 
+	public void setApplications(final Collection<Application> applications) {
+		this.applications = applications;
+	}
 }

@@ -149,27 +149,45 @@ public class MessageBoxService {
 		return MessageBox;
 	}
 
-	public MessageBox getMessageBoxAndCheckSpam(final Message message, final Actor recipient) {
+	public void getMessageBoxAndCheckSpam(final Message message, final Actor recipient) {
 		Assert.notNull(message);
-		MessageBox MessageBox;
+		MessageBox messageBox;
 		Collection<Spam> spamList;
-		boolean isSpam;
+		final Message mes = new Message();
 
 		spamList = this.spamService.findAll();
 
-		isSpam = false;
-
 		for (final Spam sp : spamList)
 			if (message.getBody().toLowerCase().contains(sp.getSpamWords().toLowerCase()) || message.getSubject().toLowerCase().contains(sp.getSpamWords().toLowerCase())) {
-				isSpam = true;
+				message.setSpam(true);
 				break;
 			}
 
-		if (isSpam)
-			MessageBox = this.findSystemMessageBoxByActor("spam box", recipient.getId());
-		else
-			MessageBox = this.findSystemMessageBoxByActor("in box", recipient.getId());
-		return MessageBox;
+		if (message.getSpam()) {
+			messageBox = this.findSystemMessageBoxByActor("spam box", recipient.getId());
+			mes.setBody(message.getBody());
+			mes.setDate(message.getDate());
+			mes.setPriority(message.getPriority());
+			mes.setRecipient(message.getRecipient());
+			mes.setSender(message.getSender());
+			mes.setSpam(message.getSpam());
+			mes.setSubject(message.getSubject());
+			if (message.getTags() != null)
+				mes.setTags(message.getTags());
+			this.saveMessageInBox(mes, messageBox);
+		} else {
+			messageBox = this.findSystemMessageBoxByActor("in box", recipient.getId());
+			mes.setBody(message.getBody());
+			mes.setDate(message.getDate());
+			mes.setPriority(message.getPriority());
+			mes.setRecipient(message.getRecipient());
+			mes.setSender(message.getSender());
+			mes.setSpam(message.getSpam());
+			mes.setSubject(message.getSubject());
+			if (message.getTags() != null)
+				mes.setTags(message.getTags());
+			this.saveMessageInBox(mes, messageBox);
+		}
 	}
 
 	private void checkPrincipalActorMessageBoxs(final Collection<MessageBox> MessageBoxs) {
@@ -194,6 +212,18 @@ public class MessageBoxService {
 		final List<MessageBox> result = (List<MessageBox>) this.messageboxRepository.getMessageBoxsByActor(actorId);
 
 		return result;
+	}
+
+	public MessageBox saveMessageInBox(final Message result, final MessageBox messageBox) {
+
+		Assert.notNull(result);
+		Assert.notNull(messageBox);
+		final Collection<Message> mes = messageBox.getMessages();
+		mes.add(result);
+		messageBox.setMessages(mes);
+
+		this.messageboxRepository.save(messageBox);
+		return messageBox;
 	}
 
 }

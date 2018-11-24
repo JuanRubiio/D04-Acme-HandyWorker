@@ -19,6 +19,9 @@ public class ConfigurationService {
 	@Autowired
 	private ConfigurationRepository	configurationRepository;
 
+	@Autowired
+	private ActorService			actorService;
+
 
 	public Collection<Configuration> findAll() {
 		Collection<Configuration> result;

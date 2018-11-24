@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -26,45 +25,19 @@ public class MessageService {
 	private ActorService		actorService;
 	@Autowired
 	private MessageBoxService	messageBoxService;
-	@Autowired
-	private SpamService			spamService;
 
 
 	public Message create() {
 		Message result;
 		Actor sender;
-		MessageBox messageBox;
 
 		sender = this.actorService.getPrincipal();
-		messageBox = this.messageBoxService.findSystemMessageBox("out box");
 
 		result = new Message();
 		result.setSender(sender);
 		result.setDate(new Date(System.currentTimeMillis()));
-		final Collection<MessageBox> mesBox = new ArrayList<MessageBox>();
-		mesBox.add(messageBox);
-		result.setMessageBoxes(mesBox);
 
 		return result;
-	}
-
-	public void spam(final Message message) {
-		Assert.notNull(message);
-		final Actor a = this.actorService.getPrincipal();
-		final Collection<MessageBox> f = this.messageBoxService.getMessageBoxsByActor(a.getId());
-		Assert.notNull(f);
-
-		MessageBox spamBox = new MessageBox();
-		for (final MessageBox m : f)
-			if (m.getName().equals("spam box"))
-				spamBox = m;
-		Assert.notNull(spamBox);
-		final Collection<MessageBox> mesBox = new ArrayList<MessageBox>();
-		mesBox.add(spamBox);
-		final Message mess = this.messageRepository.findOne(message.getId());
-		mess.setMessageBoxes(mesBox);
-		this.messageRepository.save(mess);
-
 	}
 
 	public Collection<Message> findAll() {
@@ -90,35 +63,16 @@ public class MessageService {
 
 	public Message save(final Message message) {
 		Message result;
+		MessageBox messageBox;
+
+		messageBox = this.messageBoxService.findSystemMessageBox("out box");
 
 		Assert.notNull(message);
 
 		result = this.messageRepository.save(message);
+		this.messageBoxService.saveMessageInBox(result, messageBox);
 
 		return result;
-	}
-
-	//TODO Seguramente haya que modificar las relaciones entre mensaje y box para facilitar la mensajeria
-	public Message saveToSend(final Message message) {
-		Assert.notNull(message);
-		Message result;
-
-		result = this.save(message);
-		//		Message copy;
-		//		Actor receiver;
-		//		MessageBox messageBox;
-		//
-		//		copy = result;
-		//		receiver = message.getRecipient();
-		//		messageBox = this.messageBoxService.getMessageBoxAndCheckSpam(copy, receiver);
-		//
-		//		
-		//		
-		//		copy.setMessageBoxes(me);
-		//		this.save(copy);
-
-		return result;
-
 	}
 
 	public void delete(final Message message) {
@@ -127,13 +81,14 @@ public class MessageService {
 		this.messageRepository.delete(message);
 	}
 
-	//TODO falta cambiar las relaciones
 	public void moveMessage(final Message message, final Integer messageBoxId) {
 		final Actor actor = this.actorService.getPrincipal();
 		final MessageBox messageBox = this.messageBoxService.findOne(messageBoxId);
+		Assert.notNull(messageBox);
 		Assert.isTrue(messageBox.getActor().getId() == actor.getId());
-		message.setFolder(messageBox);
-		messageBox.setMessages(messageBox.getMessages().add(message));
+		final Collection<Message> mes = this.messageRepository.findMessagesByMessageBoxesId(messageBoxId);
+		Assert.isTrue(!mes.contains(message));
+		this.messageBoxService.saveMessageInBox(message, messageBox);
 	}
 
 	public void delete(final Integer messageId) {
@@ -142,39 +97,29 @@ public class MessageService {
 		message = this.messageRepository.findOne(messageId);
 		Assert.isTrue(message != null);
 
-		this.checkPrincipalActor(message);
-		final String folderName = message.getFolder().getName();
-		if (folderName.equals("trash box") && message.getFolder().getSystem())
+		Assert.isTrue(this.checkPrincipalActor(message));
+		final MessageBox mes = this.messageBoxService.findSystemMessageBox("trash box");
+		Assert.notNull(mes);
+
+		if (mes.getMessages().contains(message))
 			this.delete(message);
-		else {
-			final MessageBox folder = this.messageBoxService.findSystemMessageBox("trash box");
-			message.setFolder(folder);
-			this.save(message);
-		}
+		else
+			this.messageBoxService.saveMessageInBox(message, mes);
 	}
 
-	public void checkPrincipalActor(final Message message) {
+	public Boolean checkPrincipalActor(final Message message) {
+		Boolean res = false;
 		Assert.notNull(message);
 
 		Actor actor;
 
 		actor = this.actorService.getPrincipal();
 
-		Assert.isTrue(actor.getId() == message.getFolder().getActor().getId());
-
-	}
-
-	public void move(final Integer messageId, final Integer folderId) {
-		MessageBox folder;
-		Message message;
-
-		folder = this.messageBoxService.findOne(folderId);
-		this.messageBoxService.checkPrincipalActor(folder);
-		message = this.findOne(messageId);
-
-		message.setFolder(folder);
-
-		this.save(message);
+		final Collection<MessageBox> messageboxes = this.messageBoxService.getMessageBoxsByActor(actor.getId());
+		for (final MessageBox mes : messageboxes)
+			if (mes.getMessages().contains(message))
+				res = true;
+		return res;
 	}
 
 }

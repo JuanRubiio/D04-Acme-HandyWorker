@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import repositories.ActorRepository;
 import security.LoginService;
 import domain.Actor;
+import domain.Administrator;
 
 @Service
 @Transactional
@@ -67,13 +68,12 @@ public class ActorService {
 		return result;
 	}
 
-	// TODO Quizas no haga falta este metodo, revisar requisitos	
-	//    public void banActor(Integer actorId, Boolean option) {
-	//        Administrator administrator = (Administrator) this.getPrincipal();
-	//        Actor actor = this.findOne(actorId);
-	//        Assert.isTrue(administrator.getId() != actor.getId());
-	//        actor.getUserAccount().setEnabled(option);
-	//        this.save(actor);
-	//    }
+	public void banActor(final Integer actorId, final Boolean option) {
+		final Administrator administrator = (Administrator) this.getPrincipal();
+		final Actor actor = this.findOne(actorId);
+		Assert.isTrue(administrator.getId() != actor.getId());
+		actor.getUserAccount().setEnabled(option);
+		this.save(actor);
+	}
 
 }

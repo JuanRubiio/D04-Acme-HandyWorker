@@ -1,9 +1,12 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
@@ -40,8 +43,19 @@ public class HandyWorker extends Endorser {
 
 	//---------Relationships--------------
 
-	private Curriculum	curriculum;
+	private Curriculum				curriculum;
+	private Collection<Application>	applications;
 
+
+	@Valid
+	@OneToMany(mappedBy = "handyWorker")
+	public Collection<Application> getApplications() {
+		return this.applications;
+	}
+
+	public void setApplications(final Collection<Application> applications) {
+		this.applications = applications;
+	}
 
 	@NotNull
 	@Valid

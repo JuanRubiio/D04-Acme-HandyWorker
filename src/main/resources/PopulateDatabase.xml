@@ -283,6 +283,10 @@
 		<property name="curriculum" ref="curriculum1" />
 		<property name="userAccount" ref="userAccount10" />
 		<property name="score" value="" />
+		<property name="applications">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="handyWorker2" class="domain.HandyWorker">
@@ -297,6 +301,10 @@
 		<property name="curriculum" ref="curriculum2" />
 		<property name="userAccount" ref="userAccount11" />
 		<property name="score" value="" />
+		<property name="applications">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="administrator1" class="domain.Administrator">

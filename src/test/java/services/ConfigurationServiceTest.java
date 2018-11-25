@@ -25,9 +25,6 @@ public class ConfigurationServiceTest extends AbstractTest {
 	@Autowired
 	private ConfigurationService	configurationService;
 
-	@Autowired
-	private ActorService			actorService;
-
 
 	@Test
 	public void testSaveConfiguration() {

@@ -5,9 +5,11 @@ import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
 
+@Repository
 public interface AdministratorRepository extends JpaRepository<Administrator, Integer> {
 
 	@Query("select avg(c.fixUpTasks.size),min(c.fixUpTasks.size),max(c.fixUpTasks.size),sttdv(c.fixUpTasks.size) from Customer c;")

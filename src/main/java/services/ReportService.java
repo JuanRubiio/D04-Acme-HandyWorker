@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.RefereeRepository;
 import repositories.ReportRepository;
 import domain.Complaint;
 import domain.Referee;
@@ -24,13 +23,13 @@ public class ReportService {
 	private ReportRepository	reportRepository;
 
 	@Autowired
-	private RefereeRepository	refereeService;
+	private RefereeService		refereeService;
 
 	@Autowired
 	private ActorService		actorService;
 
 	@Autowired
-	private ComplaintRepository	complaintService;
+	private ComplaintService	complaintService;
 
 
 	@Autowired

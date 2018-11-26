@@ -23,6 +23,9 @@ public class RefereeService {
 	@Autowired
 	private RefereeRepository	refereeRepository;
 
+	@Autowired
+	private MessageBoxService	messageBoxService;
+
 
 	public Referee create() {
 		Referee res;
@@ -33,6 +36,9 @@ public class RefereeService {
 		authority.setAuthority(Authority.REFEREE);
 		authorities.add(authority);
 		userAccount.setAuthorities(authorities);
+
+		res.setUserAccount(userAccount);
+		this.messageBoxService.addDefaultMessageBoxs(res);
 		return res;
 	}
 

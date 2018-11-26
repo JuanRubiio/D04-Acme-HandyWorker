@@ -33,7 +33,7 @@ public class MessageBoxService {
 
 		res = new MessageBox();
 		res.setActor(this.actorService.getPrincipal());
-
+		res.setSystem(false);
 		return res;
 	}
 
@@ -63,7 +63,6 @@ public class MessageBoxService {
 		MessageBox result;
 
 		Assert.notNull(messageBox);
-		Assert.isTrue(messageBox.getSystem() == false);
 		result = this.messageboxRepository.save(messageBox);
 
 		Assert.notNull(result);
@@ -224,6 +223,10 @@ public class MessageBoxService {
 
 		this.messageboxRepository.save(messageBox);
 		return messageBox;
+	}
+
+	public Collection<MessageBox> getMessageBoxesByMessageId(final int id) {
+		return this.getMessageBoxesByMessageId(id);
 	}
 
 }

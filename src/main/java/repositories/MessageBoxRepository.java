@@ -22,4 +22,7 @@ public interface MessageBoxRepository extends JpaRepository<MessageBox, Integer>
 	@Query("select f from MessageBox f  where f.actor.id =?1")
 	Collection<MessageBox> getMessageBoxsByActor(int id);
 
+	@Query("select b from MessageBox b join b.messages mes where mes.id = ?1")
+	Collection<MessageBox> getMessageBoxesByMessageId(int id);
+
 }

@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import repositories.MessageRepository;
 import domain.Actor;
+import domain.Administrator;
 import domain.Message;
 import domain.MessageBox;
 
@@ -100,11 +101,49 @@ public class MessageService {
 		Assert.isTrue(this.checkPrincipalActor(message));
 		final MessageBox mes = this.messageBoxService.findSystemMessageBox("trash box");
 		Assert.notNull(mes);
+		final Collection<MessageBox> boxes = this.messageBoxService.getMessageBoxesByMessageId(message.getId());
 
-		if (mes.getMessages().contains(message))
+		if (!mes.getMessages().contains(message))
+			this.messageBoxService.saveMessageInBox(message, mes);
+		else if (boxes.isEmpty())
 			this.delete(message);
 		else
-			this.messageBoxService.saveMessageInBox(message, mes);
+			for (final MessageBox b : boxes) {
+				final Collection<Message> m = b.getMessages();
+				m.remove(message);
+				b.setMessages(m);
+				this.messageBoxService.save(b);
+			}
+
+	}
+	public void broadcast(final Message message) {
+		Assert.notNull(message);
+		this.save(message);
+		final Administrator administrator = (Administrator) this.actorService.getPrincipal();
+		final String subject = message.getSubject();
+		final String body = message.getBody();
+		final String priority = message.getPriority();
+		final Boolean spam = message.getSpam();
+
+		final Collection<Actor> actors = this.actorService.findAll();
+		final Message m = this.create();
+		MessageBox mesbox = new MessageBox();
+		m.setSender(administrator);
+		m.setSubject(subject);
+		m.setBody(body);
+		m.setPriority(priority);
+		m.setSpam(spam);
+		for (final Actor a : actors) {
+
+			final Collection<MessageBox> messageBoxes = this.messageBoxService.getMessageBoxsByActor(a.getId());
+
+			for (final MessageBox met : messageBoxes)
+				if (met.equals("in box"))
+					mesbox = met;
+
+			m.setRecipient(a);
+			this.messageBoxService.saveMessageInBox(m, mesbox);
+		}
 	}
 
 	public Boolean checkPrincipalActor(final Message message) {
@@ -120,6 +159,10 @@ public class MessageService {
 			if (mes.getMessages().contains(message))
 				res = true;
 		return res;
+	}
+
+	public Collection<Message> findMessagesByActorId(final int id) {
+		return this.messageRepository.findMessagesByActorId(id);
 	}
 
 }

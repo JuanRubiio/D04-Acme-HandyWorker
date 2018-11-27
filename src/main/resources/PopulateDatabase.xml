@@ -291,6 +291,10 @@
 				<ref bean="messageBox24" />
 			</list>
 		</property>
+		<property name="applications">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="handyWorker2" class="domain.HandyWorker">
@@ -311,6 +315,10 @@
 				<ref bean="messageBox26" />
 				<ref bean="messageBox27" />
 				<ref bean="messageBox28" />
+			</list>
+		</property>
+		<property name="applications">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -1250,8 +1258,8 @@
 			</list>
 		</property>
 	</bean>
-	
-		<bean id="report1" class="domain.Report">
+
+	<bean id="report1" class="domain.Report">
 		<property name="moment" value="1980/01/01 23:59:00" />
 		<property name="description" value="description1" />
 		<property name="attachements" value="attachements1" />
@@ -1306,7 +1314,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 
 	<bean id="note1" class="domain.Note">
 		<property name="moment" value="1980/01/01 03:00:00" />
